@@ -63,4 +63,13 @@ console.log(primerTopping); */
 //Eliminar una clase 
 /* primerTopping.classList.remove('topping'); */
 
+//crear un elemento 
+
+const listaDeTopping = document.getElementById('lista-toppings');
+
+const toppingNuevo = document.createElement('li');
+toppingNuevo.classList.add('topping', 'fondo-marron')
+toppingNuevo.innerText = 'Queso Extra';
+listaDeTopping.append(toppingNuevo);
+
 
