@@ -65,11 +65,14 @@ console.log(primerTopping); */
 
 //crear un elemento 
 
-const listaDeTopping = document.getElementById('lista-toppings');
+/* const listaDeTopping = document.getElementById('lista-toppings');
 
 const toppingNuevo = document.createElement('li');
 toppingNuevo.classList.add('topping', 'fondo-marron')
 toppingNuevo.innerText = 'Queso Extra';
-listaDeTopping.append(toppingNuevo);
+listaDeTopping.append(toppingNuevo); */
+
+//eliminar un elemento
+/* toppingNuevo.remuve(); */
 
 
