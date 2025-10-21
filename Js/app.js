@@ -70,9 +70,22 @@ console.log(primerTopping); */
 const toppingNuevo = document.createElement('li');
 toppingNuevo.classList.add('topping', 'fondo-marron')
 toppingNuevo.innerText = 'Queso Extra';
-listaDeTopping.append(toppingNuevo); */
+listaDeTopping.append(toppingNuevo);
+listaDeTopping.appendChild() --agrega elementos html*/
+
+
+/* const listaDeToppings = document.getElementById('lista-toppings)
+listaDeToppings.parentElement  */
+
 
 //eliminar un elemento
 /* toppingNuevo.remuve(); */
 
 
+const albahaca = document.getElementById('albahaca');
+
+function mostrarClic (topping){
+console.log(topping)
+}
+
+albahaca.addEventListener('click ', mostrarClic);
