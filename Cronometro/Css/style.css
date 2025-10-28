@@ -3,3 +3,54 @@
     margin: 0;
     box-sizing: border-box;
 }
+
+body{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: url(../imagenes/bg.jpg) no-repeat center center/cover;
+}
+
+.contenedor-principal{
+    width: 80vw;
+    max-width: 600px;
+    min-height: 350px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+}
+
+.contenedor-botones{
+    padding: 20px;
+}
+
+#cronometro{
+    width: 100%;
+    font-size: 80px;
+    font-weight: bold;
+    user-select: none;
+    font-family: 'Noto Sans Thai', sans-serif;
+}
+.boton{
+    width: 80px;
+    height: 80px;
+    font-size: 50px;
+    margin: 10px;
+    padding: 10px;
+}
+
+#boton-inicio-pausa.iniciar, #boton-inicio-pausa.iniciar i {
+    background-color: #08e008;
+}
+
+#boton-incio-pausa.pausar, #boton-incio-pausa.pausar i {
+    background-color: #ffdc00;
+}
+
+#boton-reiniciar{
+    background-color: red;
+}
