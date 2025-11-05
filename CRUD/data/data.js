@@ -1,4 +1,4 @@
-[
+export default [
   {
     "id": 1,
     "gift": "Spotify Premium",

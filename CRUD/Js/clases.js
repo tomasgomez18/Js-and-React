@@ -7,4 +7,4 @@ export class Gift{
         this.precio = precio
         this.imagen = imagen
     }
-}
+    };

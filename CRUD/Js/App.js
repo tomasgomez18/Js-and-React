@@ -1,28 +1,43 @@
-fetch('../data/data.json')
-  .then(res => res.json())
-  .then(datos => {
-    console.log(datos);
+import datos from '../data/data.js';
+import {Gift} from './clases.js'
 
-    const cuerpoTabla = document.querySelector('#cuerpo-tabla');
+const cuerpoTabla = document.getElementById('cuerpo-tabla');
 
-    const cargarTabla = () => {
-      datos.map(item => {
+const cargarTabla = () =>{
+    cuerpoTabla.innerHTML = '';
+    datos.map(item => {
         const fila = document.createElement('tr');
-        const celdas = `
-          <th>${item.gift}</th>
-          <th>${item.tipo}</th>
-          <th>${item.tiempo}</th>
-          <th>$${item.precio}</th>
-        `;
+        const celdas = `  <td>${item.gift}</td>
+      <td>${item.tipo}</td>
+      <td>${item.tiempo}</td>   
+      <td>$${item.precio}</td>
+      <div class="d-flex gap-2">
+      <button class="btn btn-outline-warning"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+      <button class="btn btn-outline-danger"><i class="fa fa-times-circle" aria-hidden="true"></i></button>
+      
+      </div>`
         fila.innerHTML = celdas;
-        cuerpoTabla.append(fila);
-      });
-    };
+        cuerpoTabla.append(fila)
+    });
+}
 
-    cargarTabla(); 
-  })
-  .catch(error => {
-    console.error('Error al cargar el JSON:', error);
-  });
+const agregarGift = (event) =>{
+    event.preventDefault();
+    let id = datos.at(-1).id+1;
+    let gift = document.getElementById('gift').value;
+    let tipo = document.getElementById('tipo').value;
+    let tiempo = document.getElementById('tiempo').value;
+    let precio = parseFloat(document.getElementById('precio').value);
+    let imagen = document.getElementById('imagen').value;
 
-import { Gift } from './clases.js';
+    datos.push(new Gift(id, gift, tipo, tiempo, precio, imagen));
+    document.getElementById('formGift').reset();
+    cargarTabla()
+
+
+
+}
+
+cargarTabla();
+
+document.getElementById('formGift').addEventListener('submit', agregarGift);
