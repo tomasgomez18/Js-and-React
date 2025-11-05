@@ -13,7 +13,7 @@ const cargarTabla = () =>{
       <td>$${item.precio}</td>
       <div class="d-flex gap-2">
       <button class="btn btn-outline-warning"><i class="fa fa-pencil" aria-hidden="true"></i></button>
-      <button class="btn btn-outline-danger"><i class="fa fa-times-circle" aria-hidden="true"></i></button>
+      <button class="btn btn-outline-danger"><i class="fa fa-times-circle" aria-hidden="true"onclick="borrarGift(${item.id})"></i></button>
       
       </div>`
         fila.innerHTML = celdas;
@@ -34,8 +34,16 @@ const agregarGift = (event) =>{
     document.getElementById('formGift').reset();
     cargarTabla()
 
+}
 
-
+window. borrarGift = (id) =>{
+    
+    let index = datos.findIndex(item => item.id === id);
+    let validar = confirm (`Estas seguro que deseas eliminar ${datos[index].gift}?`);
+    if(validar){
+        datos.splice(index, 1);
+        cargarTabla(); 
+    }
 }
 
 cargarTabla();
