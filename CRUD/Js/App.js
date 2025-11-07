@@ -16,8 +16,8 @@ window.mostrarModal = (id) => {
   myModal.show();
 };
 
-const giftUpdate = (e) => {
-  e.preventDefault(); // ✅ corregido
+const giftUpdate = (event) => {
+  event.preventDefault(); 
   let index = datos.findIndex(item => item.id === idGiftUpdate);
 
   datos[index].gift = document.getElementById('giftModal').value;
