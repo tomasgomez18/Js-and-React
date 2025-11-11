@@ -1,5 +1,9 @@
-import datos from '../data/data.js';
+import datosIniciales from '../data/data.js';
 import { Gift } from './clases.js';
+import { cargaDeDatos } from './funciones.js';
+
+// Inicializa datos con la función de carga
+let datos = cargaDeDatos() || [];
 
 const cuerpoTabla = document.getElementById('cuerpo-tabla');
 const myModal = new bootstrap.Modal(document.getElementById('modalGift'));
@@ -8,31 +12,39 @@ let idGiftUpdate = null;
 window.mostrarModal = (id) => {
   idGiftUpdate = id;
   let index = datos.findIndex(item => item.id === id);
-  document.getElementById('giftModal').value = datos[index].gift;
-  document.getElementById('tipoModal').value = datos[index].tipo;
-  document.getElementById('tiempoModal').value = datos[index].tiempo;
-  document.getElementById('precioModal').value = datos[index].precio;
-  document.getElementById('imagenModal').value = datos[index].imagen;
-  myModal.show();
+  
+  if (index !== -1) {
+    document.getElementById('giftModal').value = datos[index].gift;
+    document.getElementById('tipoModal').value = datos[index].tipo;
+    document.getElementById('tiempoModal').value = datos[index].tiempo;
+    document.getElementById('precioModal').value = datos[index].precio;
+    document.getElementById('imagenModal').value = datos[index].imagen;
+    myModal.show();
+  }
 };
 
 const giftUpdate = (event) => {
   event.preventDefault(); 
   let index = datos.findIndex(item => item.id === idGiftUpdate);
 
-  datos[index].gift = document.getElementById('giftModal').value;
-  datos[index].tipo = document.getElementById('tipoModal').value;
-  datos[index].tiempo = document.getElementById('tiempoModal').value;
-  datos[index].precio = document.getElementById('precioModal').value;
-  datos[index].imagen = document.getElementById('imagenModal').value;
+  if (index !== -1) {
+    datos[index].gift = document.getElementById('giftModal').value;
+    datos[index].tipo = document.getElementById('tipoModal').value;
+    datos[index].tiempo = document.getElementById('tiempoModal').value;
+    datos[index].precio = document.getElementById('precioModal').value;
+    datos[index].imagen = document.getElementById('imagenModal').value;
 
-  cargarTabla();
-  myModal.hide();
+    localStorage.setItem('datos', JSON.stringify(datos));
+    cargarTabla();
+    myModal.hide();
+  }
 };
 
 const cargarTabla = () => {
+  const datosActualizados = JSON.parse(localStorage.getItem('datos')) || datos;
   cuerpoTabla.innerHTML = '';
-  datos.map(item => {
+  
+  datosActualizados.map(item => {
     const fila = document.createElement('tr');
     const celdas = `
       <td>${item.gift}</td>
@@ -57,7 +69,7 @@ const cargarTabla = () => {
 
 const agregarGift = (event) => {
   event.preventDefault();
-  let id = datos.at(-1)?.id + 1 || 1;
+  let id = datos.length > 0 ? Math.max(...datos.map(item => item.id)) + 1 : 1;
   let gift = document.getElementById('gift').value;
   let tipo = document.getElementById('tipo').value;
   let tiempo = document.getElementById('tiempo').value;
@@ -65,19 +77,26 @@ const agregarGift = (event) => {
   let imagen = document.getElementById('imagen').value;
 
   datos.push(new Gift(id, gift, tipo, tiempo, precio, imagen));
+  
+ 
   document.getElementById('formGift').reset();
+  localStorage.setItem('datos', JSON.stringify(datos));
+  lo
   cargarTabla();
 };
 
 window.borrarGift = (id) => {
   let index = datos.findIndex(item => item.id === id);
-  let validar = confirm(`¿Estás seguro que deseas eliminar ${datos[index].gift}?`);
-  if (validar) {
-    datos.splice(index, 1);
-    cargarTabla();
+  if (index !== -1) {
+    let validar = confirm(`¿Estás seguro que deseas eliminar ${datos[index].gift}?`);
+    if (validar) {
+      datos.splice(index, 1);
+      localStorage.setItem('datos', JSON.stringify(datos));
+      localStorage.setItem('datos', JSON.stringify(datos));
+      cargarTabla();
+    }
   }
 };
-
 cargarTabla();
 
 document.getElementById('formGift').addEventListener('submit', agregarGift);
