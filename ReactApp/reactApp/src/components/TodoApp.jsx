@@ -1,29 +1,27 @@
 import React from 'react'
 import { useState } from 'react';
 
-const TodoApp = () => {
+function TodoApp ()  {
 
-  const [contador, setContador] = useState (0);
-
-
-
-
-
-
-
-    console.log(contador);
-    
-    const mostrarNotas = () =>{
-        console.log(notas)
-    }
+  const notass = [{
+      id: crypto.randomUUID(),
+      text: 'Soy la nota 1',
+  },
+{
+   id: crypto.randomUUID(),
+      text: 'Soy la nota 1',
+}
+];
+const [notas, setNotas] = useState(notass);
+ 
  
   return (
     <>
-    <h1>contador</h1>
-    <p>{contador}</p>
-    <button onClick={() => setContador(contador + 1)}>+</button>
-    <button onClick={() => setContador (contador - 1)}>-</button>
-
+        <h1>Notas</h1>
+        <ul>
+          <li>{notas [0].text }</li>
+          <li>{notas [1].text}</li>
+    </ul>
     </>
   )
 }
