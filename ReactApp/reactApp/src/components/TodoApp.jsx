@@ -1,14 +1,29 @@
 import React from 'react'
+import { useState } from 'react';
 
-const TodoApp = ({notas}) => {
+const TodoApp = () => {
 
+  const [contador, setContador] = useState (0);
+
+
+
+
+
+
+
+    console.log(contador);
+    
+    const mostrarNotas = () =>{
+        console.log(notas)
+    }
+ 
   return (
     <>
-    <h1>App de notas</h1>
-    <ul>
-        <li>{notas[0].text}</li>
-        <li>{notas[1].text}</li>
-    </ul>
+    <h1>contador</h1>
+    <p>{contador}</p>
+    <button onClick={() => setContador(contador + 1)}>+</button>
+    <button onClick={() => setContador (contador - 1)}>-</button>
+
     </>
   )
 }
